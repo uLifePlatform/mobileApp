@@ -1,18 +1,18 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
-import {NativeRouter, Route, Link} from "react-router-native";
+import {NativeRouter, Link} from "react-router-native";
+import {Route} from "react-router-dom";
+
 
 // Layouts
 import Login from './Layouts/Login'
-import EventCreate from './Pages/EventCreate/view'
+import Main from './Layouts/App'
 
-export default function App() {
+function App() {
     return (
         <NativeRouter>
-            <View>
-                <Route exact path="/" component={Login}/>
-                <Route path="/event-create" component={EventCreate}/>
-            </View>
+            <Route exact path="/" component={Main}/>
         </NativeRouter>
     );
 }
+
+export default App
