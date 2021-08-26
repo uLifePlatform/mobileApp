@@ -23,7 +23,7 @@ export default function Login() {
         <View>
             <Animatable.Image
             animation = "bounceIn"
-            duraton = "3000"
+            duraton = "1500"
             style={styles.logo}
             source={require('./loginpic.png')}/>
         </View>
