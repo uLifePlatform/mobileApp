@@ -7,15 +7,24 @@ import {Link, useHistory} from "react-router-dom";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {Picker} from '@react-native-picker/picker';
+import DatePicker from 'react-native-date-picker';
 
 export default function () {
     const history = useHistory()
+    const [gender, SetGender] = useState();
     const [isSecureEntry, setIsSecureEntry] =useState(true)
     const [isSecureEntry2, setIsSecureEntry2] =useState(true)
     const [iconName, changeIconName] =useState("eye-slash")
     const [iconName2, changeIconName2] =useState("eye-slash")
+    const [date, setDate] = useState(new Date)
     return (
         <>
+        <View style={styles.backarrow}>
+            <TouchableOpacity onPress={()=> history.goBack()}>
+                <Icon name="chevron-left" size={20}/>
+            </TouchableOpacity>
+        </View>
         <View style={styles.title}>
             <Text style={styles.titletext}>SignUp</Text>
         </View>
@@ -84,7 +93,20 @@ export default function () {
                 <Icon size={15} name={iconName2}/>
             </TouchableOpacity> 
         </View>  
-        <View style={styles.loginbut}>
+        <Picker
+        label="Gender"
+        mode= "dialog"
+        style={styles.spol}
+        selectedValue={SetGender}
+        onValueChange={(itemValue, itemIndex) =>
+        SetGender(itemValue)
+        }>
+        <Picker.Item label="Male" value="MALE" />
+        <Picker.Item label="Female" value="FEMALE" />
+        <Picker.Item label="Other" value="OTHER" />
+        </Picker>
+        <DatePicker date={date} onDateChange={setDate} /> 
+        <View style={styles.signinbut}>
         <Button mode="contained" loading="" color="#02D0F3" onPress={() => console.log('Pressed')}>
         <Text style={styles.textbutton}>SignUp</Text>
         </Button>
@@ -96,10 +118,12 @@ export default function () {
 const styles = StyleSheet.create({ 
     title: {
     alignItems:"center",
-    marginTop: 120,
-    paddingBottom: 50,
+    marginTop: 40,                                                                                               
+    paddingBottom: 110,
     },
     titletext:{
+        fontWeight: "bold",
+        fontSize:30,
     },
     action: {
         flexDirection: 'row',
@@ -121,9 +145,17 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
         marginHorizontal: 5,
     },
-    loginbut: {
+    signinbut: {
         marginLeft:100,
         width:160,
-        marginTop: 25,
+        marginTop: 60,
     },
+    backarrow: {
+        marginTop: 50,
+        marginLeft: 22,
+    },
+    spol: {
+        marginLeft: 35,
+        marginTop: 10,
+    }
 }); 

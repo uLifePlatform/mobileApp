@@ -4,15 +4,21 @@ import {Route} from "react-router-dom";
 
 
 // Layouts
-import Login from './Layouts/Login'
-import Main from './Layouts/App'
+//import Login from './Layouts/Loginroute'
+import SignUp from './Pages/signup/signUp' 
+import Login from './Pages/login/Login' 
+import Profile from './Pages/profile/Profile'
+import EventCreate from './Pages/EventCreate/view'
 
 function App() {
     return (
         <NativeRouter>
-            <Route exact path="/" component={Main}/>
+            <View>
+                <Route exact path="/" component={SignUp}/>
+                <Route path="/event-create" component={EventCreate}/>
+            </View>
         </NativeRouter>
     );
-}
+} 
 
 export default App

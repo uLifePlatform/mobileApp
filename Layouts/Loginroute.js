@@ -1,26 +1,27 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { NativeRouter, Switch, Route } from "react-router-native";
+import { NavigationContainer, NavigationRouteContext } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from "D:/delo/Ulife/git/mobileApp/Pages/login/Login";
 import SignUp from "D:/delo/Ulife/git/mobileApp/Pages/signup/signUp";
+ 
+const AuthStack = createNativeStackNavigator();
 
 export default class App extends React.Component {
   render() {
     return (
-      <NativeRouter>
-        <View style={styles.container}>
-          <Switch>
-            <Route exact path="/" component={SignUp}/>
-            <Route exact path="/SignUp" component={SignUp}/>
-          </Switch>
-        </View>
-      </NativeRouter>
+      <NavigationContainer>
+        <AuthStack.Navigator>
+          <AuthStack.Screen name="Login" Component={Login}  />  
+          <AuthStack.Screen name="SignUp" Component={SignUp}  />
+        </AuthStack.Navigator>
+      </NavigationContainer>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
   container: {
     flex: 1,
     backgroundColor: "#fff",

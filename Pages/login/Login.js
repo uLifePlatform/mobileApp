@@ -6,13 +6,15 @@ import {CardTitle} from "react-native-paper/src/components/Card/CardTitle";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { NativeRouter, Route, Link, Router } from "react-router-native";
-import {useHistory} from "react-router-dom";
+import { NavigationContainer, NavigationRouteContext } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Login() {
-    let history = useHistory()
+
+export default function Login({ navigation }) {
     function loginUser(){
     }
+    const [username, SetUsername] = useState('')
+    const [password, SetPassword] = useState('')
     const [isSecureEntry, setIsSecureEntry] =useState(true)
     const [iconName, changeIconName] =useState("eye-slash")
     return (
@@ -23,9 +25,9 @@ export default function Login() {
         <View>
             <Animatable.Image
             animation = "bounceIn"
-            duraton = "1500"
+            duraton = "300"
             style={styles.logo}
-            source={require('./loginpic.png')}/>
+            source={require('./pictures/loginpic.png')}/>
         </View>
         <View style={styles.action}>
                 <FontAwesome 
@@ -35,6 +37,8 @@ export default function Login() {
             <TextInput
                     style={styles.textInput}
                     placeholder="Username"
+                    value={username}
+                    onChangeText={SetUsername}
                     placeholderTextColor="#666666"
                     autoCapitalize="none"
             />
@@ -49,6 +53,8 @@ export default function Login() {
                     style={styles.textInput}
                     placeholder="Password"
                     placeholderTextColor="#666666"
+                    value={password}
+                    onChangeText={SetPassword}
                     autoCapitalize="none"
             />
             <TouchableOpacity onPress={()=>{
@@ -64,19 +70,18 @@ export default function Login() {
         <Text style={styles.textbutton}>Login</Text>
         </Button>
         </View> 
-        <View style={styles.tosignup}> 
+        <View style={styles.tosignup}>
             <Text style={styles.tosignuptext}>Don't have an account?</Text>
         </View> 
         <View>
-        <Button style={styles.signbut} mode="Outlined" color="#02D0F3" onPress={() => history.push("/SignUp")}>
+        <Button style={styles.signbut} mode="Outlined" color="#02D0F3" onPress={() => navigation.push("SingUp")}>
             Sign-up
         </Button>
         </View>
-        </>              
+        </> 
+              
     );
-
-}
-
+} 
 const styles = StyleSheet.create({
 
     logo: {
@@ -111,10 +116,11 @@ const styles = StyleSheet.create({
         marginLeft:100,
         width:160,
         marginTop: 25,
+        borderRadius: 20,
     },
     tosignuptext: {
         fontSize:10,
-    },
+    }, 
     tosignup:{    
         marginTop: 130,
         alignItems:"center"
@@ -122,5 +128,5 @@ const styles = StyleSheet.create({
     signbut:{
         marginLeft:124,
         width:110,
-    },
+    }, 
 }); 
